@@ -1,0 +1,210 @@
+{
+  "info": {
+    "_postman_id": "38aa226b-f23c-46b7-9dd4-a8084403ed51",
+    "name": "LabeBank",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET USERS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3003/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users"]
+        },
+        "description": "**PT**: Retorna todos os usuários cadastrados.\n\n**EN**: Returns all registered users."
+      },
+      "response": []
+    },
+    {
+      "name": "GET BALANCE",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "cpf",
+            "value": "12345678901",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3003/users/balance?name=lucas-pasche",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users", "balance"],
+          "query": [
+            {
+              "key": "name",
+              "value": "lucas-pasche"
+            },
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "**PT**: Retorna o saldo de um usuário específico ao enviar, na requisição, seu nome e CPF.\n\n**EN**: Returns the balance of a specific user by sending, in the request, his name and CPF.\n\n**Query params format**: name-surname\n\n**For non-brazilian users**: [CPF number - Wikipedia](https://en.wikipedia.org/wiki/CPF_number)"
+      },
+      "response": []
+    },
+    {
+      "name": "USER REGISTER",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Paulo Henrique Ganso\",\r\n    \"CPF\": \"01928374656\",\r\n    \"birth\": \"09/01/1987\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users"]
+        },
+        "description": "**PT:** Cadastra um novo usuário.\n\n**EN**: Register a new user.\n\n**For non-brazilian users**: [CPF number - Wikipedia](https://en.wikipedia.org/wiki/CPF_number)"
+      },
+      "response": []
+    },
+    {
+      "name": "TRANSFER BETWEEN USERS",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"myName\": \"Giovana Machado\",\r\n    \"myCPF\": \"10293837465\",\r\n    \"recipientName\": \"Lucas Pasche\",\r\n    \"recipientCPF\": \"12345678901\",\r\n    \"value\": 12\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/users/transfer",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users", "transfer"]
+        },
+        "description": "**PT:** Cria uma transferência entre dois usuários.\n\n**EN**: Creates a transfer between two users."
+      },
+      "response": []
+    },
+    {
+      "name": "ADD BILLS",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "cpf",
+            "value": "12345678901",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"value\": 450,\r\n    \"description\": \"Curso de Salesforce\",\r\n    \"date\": \"2023/07/10\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/users/:name/add-bill",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users", ":name", "add-bill"],
+          "variable": [
+            {
+              "key": "name",
+              "value": "lucas-pasche"
+            }
+          ]
+        },
+        "description": "**PT**: Registra uma nova conta para um usuário especificado. Se não for dada uma data de vencimento (AAAA/DD/MM), a conta será registrada com o vencimento na data do registro.\n\n**EN**: Register a new bill for a specified user. If an expiration date (YYYY/DD/MM) is not given, the bill will be registered with the expiration date on the registration date.\n\n**Path params format**: name-surname"
+      },
+      "response": []
+    },
+    {
+      "name": "DEPOSIT",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "cpf",
+            "value": "12345678901",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"value\": 12500\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/users/:name/add-balance",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users", ":name", "add-balance"],
+          "variable": [
+            {
+              "key": "name",
+              "value": "lucas-pasche"
+            }
+          ]
+        },
+        "description": "**PT**: Adiciona o valor especificado ao saldo de um usuário.\n\n**EN:** Adds the specified amount to a user's balance.\n\n**Path params format**: name-surname"
+      },
+      "response": []
+    },
+    {
+      "name": "UPDATE BALANCE",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "cpf",
+            "value": "12345678901",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3003/users/:name/update-balance",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3003",
+          "path": ["users", ":name", "update-balance"],
+          "variable": [
+            {
+              "key": "name",
+              "value": "lucas-pasche"
+            }
+          ]
+        },
+        "description": "**PT**: Atualiza o saldo de um usuário, realizando as operações registradas com datas anteriores ao dia desta requisição.\n\n**EN**: Updates an user's balance, performing operations recorded with dates prior to the day of this request.\n\n**Path params format**: name-surname"
+      },
+      "response": []
+    }
+  ]
+}
