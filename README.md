@@ -1,7 +1,7 @@
 # Labebank
 Banking system made with Node.js. A simple CRUD system that emmulates banking activities.
 
-#Tools
+## Technologies used
 - TypeScript;
 - Node.js;
 - Express;
